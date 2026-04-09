@@ -1,0 +1,11 @@
+body {
+    background-color: #f9f9f9;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+table th, table td {
+    width: 50%;
+    text-align: center;
+}
