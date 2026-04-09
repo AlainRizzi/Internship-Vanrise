@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="loginApp" ng-controller="LoginController">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-animate.min.js"></script>
+    <script src="../Scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="~/Scripts/login.js"></script>
+</head>
+<body>
+    <div class="container" style="max-width: 400px; margin-top: 50px;">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" ng-model="username" placeholder="Enter username" required />
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <div class="input-group">
+                <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" ng-model="password" placeholder="Enter password"/>
+                <span class="input-group-addon" style="cursor:pointer;" ng-click="togglePassword()">
+                    <i class="glyphicon" ng-class="showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open'"></i>
+                </span>
+            </div>
+        </div>
+        <button class="btn btn-primary" ng-click="login()">Login</button>
+
+        <div class="alert alert-danger" ng-if="errorMessage" style="margin-top: 15px;">
+            {{ errorMessage }}
+        </div>
+    </div>
+</body>
+</html>
+
+@*alain alain234
+alain1 alain456
+alain2 alain367
+alain3 alain123*@

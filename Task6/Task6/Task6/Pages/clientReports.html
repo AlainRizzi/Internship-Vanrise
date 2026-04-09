@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html ng-app="deviceApp" ng-controller="ClientTypeReportController">
+<head>
+    <meta charset="utf-8" />
+    <title>Clients Report</title>
+    <script>
+        if (!sessionStorage.getItem('username')) {
+            // Not logged in → redirect to login page
+            window.location.href = '/Account/Login';
+        }
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-animate.min.js"></script>
+    <script src="../Scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="../Scripts/client.js"></script>
+    <script src="../Scripts/client-type-report.js"></script>
+    <link rel="stylesheet" href="../Content/client.css" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Task 6</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="Task6.html">Devices</a></li>
+                <li><a href="client.html">Clients</a></li>
+                <li><a href="phonenumbers.html">Phone Numbers</a></li>
+                <li><a href="PhoneNumberReservation.html">Phone Numbers Reservation</a></li>
+                <li><a href="clientReports.html">Client Report</a></li>
+                <li><a href="phoneNumbersReport.html">Device Report</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Number of Clients per Type</h2>
+        <div class="form-inline">
+            <div class="form-inline">
+                <client-type-selector model="filters.type"
+                                          get-data="getType()"
+                                          mode="search"
+                                          is-edit="false">
+                </client-type-selector>
+            </div>
+
+            <table class="table table-bordered table-striped" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>No. of Clients</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in reportData">
+                        <td>{{ row.TypeName }}</td>
+                        <td>{{ row.ClientCount }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

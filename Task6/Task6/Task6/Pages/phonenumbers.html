@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Numbers</title>
+    <script>
+        if (!sessionStorage.getItem('username')) {
+            // Not logged in → redirect to login page
+            window.location.href = '/Account/Login';
+        }
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-animate.min.js"></script>
+    <script src="../Scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="../Scripts/PhoneNumbers.js"></script>
+    <link rel="stylesheet" href="../Content/phonenumbers.css" />
+</head>
+<body ng-app="deviceApp" ng-controller="PhoneCtrl">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Task 6</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="Task6.html">Devices</a></li>
+                <li><a href="client.html">Clients</a></li>
+                <li><a href="phonenumbers.html">Phone Numbers</a></li>
+                <li><a href="PhoneNumberReservation.html">Phone Numbers Reservation</a></li>
+                <li><a href="clientReports.html">Client Report</a></li>
+                <li><a href="phoneNumbersReport.html">Device Report</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Phone Numbers</h2>
+
+        <div class="form-inline">
+            <input type="text" class="form-control" ng-model="searchNumber" placeholder="Search by number">
+            <device-selector selected-device="searchDeviceID" is-search="true"></device-selector>
+            <button class="btn btn-primary" ng-click="filterPhones()">Search</button>
+            <button class="btn btn-success" ng-click="openModal()">Add</button>
+        </div>
+
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Number</th>
+                    <th>Device</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in filteredPhones">
+                    <td>{{p.ID}}</td>
+                    <td>{{p.Number}}</td>
+                    <td>{{p.DeviceName}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" ng-click="openModal(p)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <script type="text/ng-template" id="phoneModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                {{ IsEdit ? 'Edit Phone Number: ' + OriginalNumber : 'Add New Phone Number' }}
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <phone-number-input model="ModalPhoneNumber.Number" is-edit="isEdit"></phone-number-input>
+            <div class="form-group">
+                <label>Device:</label>
+                <device-selector selected-device="ModalPhoneNumber.DeviceID" is-edit="true"></device-selector>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="save()">{{ IsEdit ? 'Edit' : 'Add' }}</button>
+        </div>
+    </script>
+
+</body>
+</html>

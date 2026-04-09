@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Devices</title>
+    <script>
+        if (!sessionStorage.getItem('username')) {
+            // Not logged in → redirect to login page
+            window.location.href = '/Account/Login';
+        }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- AngularJS -->
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-animate.min.js"></script>
+    <script src="../Scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+
+    <!-- Your AngularJS App -->
+    <script src="../Scripts/task6_js_http.js"></script>
+
+    <link rel="stylesheet" href="../Content/task6_css.css" />
+
+</head>
+<body ng-app="deviceApp" ng-controller="DeviceCtrl">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Task 6</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="Task6.html">Devices</a></li>
+                <li><a href="client.html">Clients</a></li>
+                <li><a href="phonenumbers.html">Phone Numbers</a></li>
+                <li><a href="PhoneNumberReservation.html">Phone Numbers Reservation</a></li>
+                <li><a href="clientReports.html">Client Report</a></li>
+                <li><a href="phoneNumbersReport.html">Device Report</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="text-left">Devices</h2>
+
+        <div class="form-inline text-left" style="margin-bottom: 20px;">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="deviceName" placeholder="Device Name...">
+            </div>
+            <button class="btn btn-primary" ng-click="searchDevices()">Search</button>
+            <button class="btn btn-success" ng-click="openModal()">Add</button>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="device in filteredDevices">
+                    <td>{{device.id}}</td>
+                    <td>{{device.name}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" ng-click="openModal(device)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script type="text/ng-template" id="deviceModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                {{ isEdit ? 'Edit Device: ' + originalName : 'Add New Device' }}
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="deviceInput"><strong>Device Name:</strong></label>
+                <input type="text" id="deviceInput" class="form-control" ng-model="modalDevice.name" placeholder="Enter device name">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="save()">
+                {{ isEdit ? 'Edit' : 'Add' }}
+            </button>
+        </div>
+    </script>
+
+
+</body>
+</html>
