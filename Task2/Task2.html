@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html ng-app="deviceApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Devices</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="Task2_js.js"></script>
+
+    <link rel="stylesheet" href="style_task2.css">
+</head>
+<body ng-controller="DeviceCtrl">
+
+    <div class="container" style="margin-top: 30px;">
+        <h2 class="text-left">Devices</h2>
+
+        <div class="form-inline text-left" style="margin-bottom: 20px;">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="deviceName" placeholder="Device Name...">
+            </div>
+            <button class="btn btn-info" ng-click="searchDevices()">Search</button>
+            <button class="btn btn-success" ng-click="openModal()">Add</button>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="device in filteredDevices">
+                    <td>{{device.id}}</td>
+                    <td>{{device.name}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" ng-click="openModal(device)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script type="text/ng-template" id="deviceModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                {{ isEdit ? 'Edit Device: ' + originalName : 'Add New Device' }}
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="deviceInput"><strong>Device Name:</strong></label>
+                <input type="text" id="deviceInput" class="form-control" ng-model="modalDevice.name" placeholder="Enter device name">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="save()">
+                {{ isEdit ? 'Edit' : 'Add' }}
+            </button>
+        </div>
+    </script>
+
+
+</body>
+</html>
