@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Client Management</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-animate.min.js"></script>
+    <script src="../Scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="../Scripts/PhoneNumberReservation.js"></script>
+    <link rel="stylesheet" href="../Content/client.css" />
+</head>
+<body ng-app="reservationApp" ng-controller="ReservationCtrl">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Task 5</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="Task5.html">Devices</a></li>
+                <li><a href="client.html">Clients</a></li>
+                <li><a href="phonenumbers.html">Phone Numbers</a></li>
+                <li><a href="PhoneNumberReservation.html">Phone Numbers Reservation</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Phone Number Reservations</h2>
+
+        <!-- Filter section -->
+        <div class="form-inline">
+                <client-selector ng-model="filter.clientId" is-search="true"></client-selector>
+                <phone-number-selector ng-model="filter.phoneNumberId" is-search="true"></phone-number-selector>
+                <button class="btn btn-primary" ng-click="getReservations()">Search</button>
+        </div>
+
+        <!-- Table -->
+        <table class="table table-bordered table-striped table-hover" style="margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Phone Number</th>
+                    <th>Begin Effective Date (BED)</th>
+                    <th>End Effective Date (EED)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="r in reservations">
+                    <td>{{r.ID}}</td>
+                    <td>{{r.ClientName}}</td>
+                    <td>{{r.PhoneNumber}}</td>
+                    <td>{{r.BED | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{r.EED ? (r.EED | date: 'yyyy-MM-dd') : '—'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
