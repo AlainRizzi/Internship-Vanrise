@@ -1,0 +1,24 @@
+﻿<script>
+        if (!sessionStorage.getItem('username')) {
+            // Not logged in → redirect to login page
+            window.location.href = '/Account/Login';
+        }
+</script>
+<nav class="navbar navbar-inverse" ng-controller="NavbarCtrl">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Task 7</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="Task7.html">Devices</a></li>
+            <li><a href="client.html">Clients</a></li>
+            <li><a href="phonenumbers.html">Phone Numbers</a></li>
+            <li><a href="PhoneNumberReservation.html">Phone Numbers Reservation</a></li>
+            <li><a href="clientReports.html">Client Report</a></li>
+            <li><a href="phoneNumbersReport.html">Device Report</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
